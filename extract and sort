@@ -1,0 +1,60 @@
+void extract_and_sort(const char *filename, char grp[3]) {
+    FILE *f = fopen(filename, "r");
+    if (!f) {
+        perror("Error opening the file");
+        return;
+    }
+
+    if (!(grp[0] >= '1' && grp[0] <= '3' && grp[1] >= 'A' && grp[1] <= 'C' && grp[2] == '\0')) {
+            printf("\tInvalid Group. \n");
+            return;
+        }
+
+    student students[100]; // Array to store students from the specified group
+    int count = 0;         // Count of students in the specified group
+    char line[256];        // Buffer for reading lines from the file
+
+    // Read each line of the file
+    while (fgets(line, sizeof(line), f)) {
+        student s; // Temporary student structure for parsing
+
+        // Parse the student record
+        if (sscanf(line, "%d %s %s %d %s %f 4 %f 3 %f 2 %f 5 %f %d",
+                   &s.id, s.surname, s.name, &s.birth_year, s.group,
+                   &s.note[0], &s.note[1], &s.note[2], &s.note[3], &s.moyenne, &s.exist) == 11) {
+
+
+            // Check if the student belongs to the specified group and exists
+            if (strcmp(s.group, grp) == 0 && s.exist == 0) {
+                students[count++] = s; // Add the student to the array
+            }
+        }
+    }
+
+    fclose(f);
+
+    // Sort the students by average grade in descending order
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = i + 1; j < count; j++) {
+            if (students[i].moyenne < students[j].moyenne) {
+                student temp = students[i];
+                students[i] = students[j];
+                students[j] = temp;
+            }
+        }
+    }
+
+    // Display the sorted students
+    printf("\nStudents in group %s sorted by average grade:\n", grp);
+    if (count == 0) {
+        printf("No students found in group %s.\n", grp);
+    } else {
+        for (int i = 0; i < count; i++) {
+            printf("Name: %s %s | ID: %d | Avg: %.2f\n",
+                   students[i].name,
+                   students[i].surname,
+                   students[i].id,
+                   students[i].moyenne);
+        }
+    }
+}
