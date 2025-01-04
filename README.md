@@ -35,6 +35,9 @@ Exemple :
 - Inserts the student in order or appends to the end if applicable.
 - Replaces the original file with the updated one after ensuring all data is written correctly.
 
+#### Problems Encountred
+- Inputing the student at the right position in ths file, if it was an unordered file we could have just opened the file in append mode and directly got our student added, we tried using fseek but it caused unintentional change in the data. So our best solution was using a temporary file.
+
 ### 2. Search Student by ID
 The `search_student_by_id` function retrieves and displays detailed information about a student based on their unique ID from a data file.
 #### Instructions:
