@@ -301,7 +301,7 @@ void modification(const char *filename, const char *temp_filename)
                     do {
                         scanf("%d", &year);
                         if (year < 1990 || year > 2020)
-                            printf("Invalid Input, please try again: ");
+                            printf("Invalid Input, please try again, the year must be between 1990 and 2020 : ");
                       } while (year < 1990 || year > 2020);
 
                     break;
