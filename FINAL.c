@@ -8,9 +8,9 @@ typedef struct student {
   char surname[30];
   int birth_year;
   char group[3];
-  float note[4]; // Array to store grades for 4 subjects
-  float moyenne; // Average grade
-  int exist; // Flag to indicate if student is active (1) or inactive (0)
+  float note[4]; 
+  float moyenne; 
+  int exist; // Flag to indicate if student is inactive (1) or active (0)
 } student;
 
 void add_student();
