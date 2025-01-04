@@ -13,12 +13,12 @@ typedef struct student {
   int exist; // Flag to indicate if student is inactive (1) or active (0)
 } student;
 
-void add_student();
-void search_student_by_id(const char *filename, int searchid);
-void modification(const char *f, const char *ftemp);
-void extract_and_sort( const char *filename ,char grp[3]);
-void logicaldeletion(const char *filename, int target_id);
-void Physical_Deletion(const char *filename, const char *Temp_file_name);
+void add_student(); // BENTALEB Lisa 
+void search_student_by_id(const char *filename, int searchid); // BOUDISSA Farouk Radouane
+void modification(const char *f, const char *ftemp); // TAYEBCHERIF Yasmine , ACHEUK Djida 
+void extract_and_sort( const char *filename ,char grp[3]); // TACHEKORT Celine 
+void logicaldeletion(const char *filename, int target_id); // DOKKAR Chaima 
+void Physical_Deletion(const char *filename, const char *Temp_file_name); // BOUAKKAZ Madjeda
 void display_students(const char *filename);
 
 int main()
@@ -88,6 +88,7 @@ int main()
     return 0;
 }
 
+// Function for Id check 
 int unique_id(int id) {
     FILE *f = fopen("Listes_Etudiants.txt", "r");
     if (f == NULL) {
@@ -95,7 +96,7 @@ int unique_id(int id) {
     }
 
     int existing_id;
-    while (fscanf(f, "%d", &existing_id) == 1) {
+    while (fscanf(f, "%d", &existing_id) == 1) { // We put our first integer of each line in the variable existing_id and we check it with the ID that the user input.
         if (existing_id == id) {
             fclose(f);
             return 0; // ID is not unique
@@ -221,7 +222,7 @@ void add_student() {
     // Replace the original file with the temp file
     if (remove("Listes_Etudiants.txt") != 0 || rename("temp.txt", "Listes_Etudiants.txt") != 0) {
         perror("Error replacing file");
-        return;
+        return -1;
     }
 
     printf("Student added successfully.\n");
