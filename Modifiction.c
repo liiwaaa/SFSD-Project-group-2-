@@ -1,9 +1,9 @@
 void modification(const char *filename, const char *temp_filename)
  {
     char line[256];
-    int fid, choice, nb, i;
+    int fid, choice, nb, i, exist;
     char module[20];
-    int exist=0;
+    exist=0;
     printf("Enter the ID of the student you want to modify: ");
     scanf("%d", &fid);
 
@@ -72,7 +72,7 @@ void modification(const char *filename, const char *temp_filename)
                     do {
                         scanf("%d", &year);
                         if (year < 1990 || year > 2020)
-                            printf("Invalid Input, please try again: ");
+                            printf("Invalid Input, please try again, the year must be between 1990 and 2020 : ");
                       } while (year < 1990 || year > 2020);
 
                     break;
@@ -139,11 +139,10 @@ void modification(const char *filename, const char *temp_filename)
         perror("Error replacing file");
         return;
     }
-     if(exist==1)
-     {
-    printf("Modification completed successfully.\n");}
-    else
-     {
-         printf("Id doesn't exist, modification is not allowed \n");
+     if(exist==1) {
+    printf("Modification completed successfully.\n");
+     }
+    else{
+    printf("Id doesn't exist, modification not allowed \n");
      }
 }
