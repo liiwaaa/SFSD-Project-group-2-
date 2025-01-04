@@ -36,8 +36,11 @@ Exemple :
 - Replaces the original file with the updated one after ensuring all data is written correctly.
 
 #### Problems Encountred
-- Inputing the student at the right position in ths file, if it was an unordered file we could have just opened the file in append mode and directly got our student added, we tried using fseek but it caused unintentional change in the data. So our best solution was using a temporary file.
-
+-Inserting the student at the correct position:
+For an unordered file, we could have simply opened the file in append mode to add the new student directly. However, maintaining the order required a more sophisticated approach.
+ . Using fseek was attempted, but it caused unintentional changes to the data, as file I/O does not support direct insertion without overwriting.
+ . Our final solution was to use a temporary file. 
+ 
 ### 2. Search Student by ID
 The `search_student_by_id` function retrieves and displays detailed information about a student based on their unique ID from a data file.
 #### Instructions:
