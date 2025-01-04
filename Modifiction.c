@@ -144,6 +144,6 @@ void modification(const char *filename, const char *temp_filename)
     printf("Modification completed successfully.\n");}
     else
      {
-         printf("Id doesn't exist so the modification is not allowed \n");
+         printf("Id doesn't exist, modification is not allowed \n");
      }
 }
