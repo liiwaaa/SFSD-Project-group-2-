@@ -1,0 +1,17 @@
+this code presents a School Student Management System, we used
+sequencial file implementing method, we used blocks to represent 
+students of the same year from different groups(EX 1A, 2B)
+and a structure of type student to represent a student by his :
+
+"" ID 
+  Family_name 
+  Name 
+  Year_of_birth 
+  Group 
+  Sfsd coeff1 
+  oop coeff2 
+  analyse coeff3 
+  algebre coeff4 
+  average 
+  status(exist) ""
+
