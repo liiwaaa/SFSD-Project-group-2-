@@ -230,9 +230,9 @@ void add_student() {
 void modification(const char *filename, const char *temp_filename)
  {
     char line[256];
-    int fid, choice, nb, i;
+    int fid, choice, nb, i, exist;
     char module[20];
-
+    exist=0;
     printf("Enter the ID of the student you want to modify: ");
     scanf("%d", &fid);
 
@@ -264,6 +264,7 @@ void modification(const char *filename, const char *temp_filename)
         }
 
         if (id == fid) {
+            exist=1;
             printf("\nModification Menu:\n");
             printf("1. Modify ID\n");
             printf("2. Modify Name\n");
@@ -367,9 +368,14 @@ void modification(const char *filename, const char *temp_filename)
         perror("Error replacing file");
         return;
     }
-
+    if(exist==1){
     printf("Modification completed successfully.\n");
+    }
+   else{
+     printf("Id doesn't exist , modification not allowed");
+   }
 }
+
 void search_student_by_id(const char *filename, int searchid) {
   FILE *f = fopen(filename, "r");
   if (f == NULL) {
