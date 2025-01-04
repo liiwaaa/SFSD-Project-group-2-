@@ -1,10 +1,9 @@
 void modification(const char *filename, const char *temp_filename)
-{
+ {
     char line[256];
     int fid, choice, nb, i;
     char module[20];
     int exist=0;
-
     printf("Enter the ID of the student you want to modify: ");
     scanf("%d", &fid);
 
@@ -23,9 +22,8 @@ void modification(const char *filename, const char *temp_filename)
         return;
     }
 
-    while (fgets(line, sizeof(line), f)) 
-    {
-        int id, year, is_active;
+    while (fgets(line, sizeof(line), f)) {
+        int id, ID, year, is_active, is_unique;
         char fname[30], name[30], group[3];
         float sfsd, poo, alg, ana, avg;
 
@@ -51,8 +49,15 @@ void modification(const char *filename, const char *temp_filename)
 
             switch (choice) {
                 case 1:
-                    printf("Enter new ID: ");
-                    scanf("%d", &id);
+                    do {
+                         scanf("%d", &ID);// User inputs an ID
+                         if (ID == id) break;
+                         is_unique = unique_id(ID);
+                               if (!is_unique) {
+                                  printf("ID already exists. Try again: ");
+                                               }
+                        } while (!is_unique );
+                        ID = id;
                     break;
                 case 2:
                     printf("Enter new Name: ");
@@ -64,12 +69,12 @@ void modification(const char *filename, const char *temp_filename)
                     break;
                 case 4:
                     printf("Enter new Year of Birth: ");
-                    scanf("%d", &year);
                     do {
-                    scanf("%d", &year);
-                    if (year < 1990 || year > 2020)
-                    printf("Invalid Input, please try again: ");
-                    } while (year < 1990 || year > 2020);
+                        scanf("%d", &year);
+                        if (year < 1990 || year > 2020)
+                            printf("Invalid Input, please try again: ");
+                      } while (year < 1990 || year > 2020);
+
                     break;
                 case 5:
                     printf("Enter new Group: ");
@@ -134,8 +139,11 @@ void modification(const char *filename, const char *temp_filename)
         perror("Error replacing file");
         return;
     }
-   if(exist=1)
-   {printf("Modification completed successfully.\n");}
+     if(exist==1)
+     {
+    printf("Modification completed successfully.\n");}
     else
-       printf("modification is not allowed \n");
+     {
+         printf("Id doesn't exist so the modification is not allowed \n");
+     }
 }
