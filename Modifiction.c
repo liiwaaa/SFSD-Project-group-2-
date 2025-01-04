@@ -3,6 +3,7 @@ void modification(const char *filename, const char *temp_filename)
     char line[256];
     int fid, choice, nb, i;
     char module[20];
+    int exist=0;
 
     printf("Enter the ID of the student you want to modify: ");
     scanf("%d", &fid);
@@ -22,7 +23,8 @@ void modification(const char *filename, const char *temp_filename)
         return;
     }
 
-    while (fgets(line, sizeof(line), f)) {
+    while (fgets(line, sizeof(line), f)) 
+    {
         int id, year, is_active;
         char fname[30], name[30], group[3];
         float sfsd, poo, alg, ana, avg;
@@ -35,6 +37,7 @@ void modification(const char *filename, const char *temp_filename)
         }
 
         if (id == fid) {
+            exist=1;
             printf("\nModification Menu:\n");
             printf("1. Modify ID\n");
             printf("2. Modify Name\n");
@@ -62,6 +65,11 @@ void modification(const char *filename, const char *temp_filename)
                 case 4:
                     printf("Enter new Year of Birth: ");
                     scanf("%d", &year);
+                    do {
+                    scanf("%d", &year);
+                    if (year < 1990 || year > 2020)
+                    printf("Invalid Input, please try again: ");
+                    } while (year < 1990 || year > 2020);
                     break;
                 case 5:
                     printf("Enter new Group: ");
@@ -126,6 +134,8 @@ void modification(const char *filename, const char *temp_filename)
         perror("Error replacing file");
         return;
     }
-
-    printf("Modification completed successfully.\n");
+   if(exist=1)
+   {printf("Modification completed successfully.\n");}
+    else
+       printf("modification is not allowed \n");
 }
