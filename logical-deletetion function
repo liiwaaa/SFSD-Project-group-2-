@@ -1,0 +1,51 @@
+void logicaldeletion(const char *filename, int target_id) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        return;
+    }
+
+    FILE *temp = fopen("tempfile.txt", "w");
+    if (temp == NULL) {
+        perror("Error creating temporary file");
+        fclose(file);
+        return;
+    }
+
+    student buf;
+    char line[256];
+    int coeff[4];
+    int found = 0;
+
+    while (fgets(line, sizeof(line), file) != NULL) {
+        int read_count = sscanf(line, "%d %s %s %d %s %f %d %f %d %f %d %f %d %f %d",
+                                &buf.id, buf.name, buf.surname, &buf.birth_year, buf.group,
+                                &buf.note[0], &coeff[0], &buf.note[1], &coeff[1],
+                                &buf.note[2], &coeff[2], &buf.note[3], &coeff[3],
+                                &buf.moyenne, &buf.exist);
+
+        if (read_count == 15 && buf.id == target_id) {
+            buf.exist = 1; // Mark as logically deleted
+            found = 1;
+        }
+
+        fprintf(temp, "%d %s %s %d %s %.1f %d %.1f %d %.1f %d %.1f %d %.1f %d\n",
+                buf.id, buf.name, buf.surname, buf.birth_year, buf.group,
+                buf.note[0], coeff[0], buf.note[1], coeff[1],   
+                buf.note[2], coeff[2], buf.note[3], coeff[3],
+                buf.moyenne, buf.exist);
+    }
+
+    fclose(file);
+    fclose(temp);
+
+    // Replace the original file with the temporary file
+    remove(filename);
+    rename("tempfile.txt", filename);
+
+    if (found) {
+        printf("Student with ID %d has been logically deleted.\n", target_id);
+    } else {
+        printf("Student with ID %d not found.\n", target_id);
+    }
+}
