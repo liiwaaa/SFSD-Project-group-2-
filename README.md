@@ -1,5 +1,5 @@
 # Student Management System
-This project is a Student Management System designed for academic institutions to streamline student data management. It provides functionalities such as adding, searching, editing, and logically deleting student records while ensuring data reliability and integrity.
+This project is a Student Management System designed for academic institutions for student data management. It provides functionalities such as adding, searching, editing, logically and physically deleting student records while ensuring data reliability and integrity.
 
 ## Table of Contents
 - [I. Data Implementation](#i-data-implementation)
@@ -21,6 +21,7 @@ Exemple :
 ```
 1 Ali Ahmed 2001 3A 15.5 4 12.0 3 14.0 2 16.5 5 14.2 0
 ```
+And the final file will be as the `Listes_etudiants.txt` in the repository.
 
 ## II. Functions
 ### 1. Add Student
