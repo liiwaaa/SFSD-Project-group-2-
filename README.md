@@ -24,7 +24,7 @@ Exemple :
 And the final file will be as the `Listes_etudiants.txt` in the repository.
 
 ## II. Functions
-### 1. Add Student
+### 1. Add Student (***Lisa BENTALEB***)
 - Validates inputs:
   - Ensures the ID is unique using the `unique_id` function.
   - Confirms the year of birth (`1990-2020`) and correct group format (e.g., `1A`).
@@ -40,7 +40,8 @@ And the final file will be as the `Listes_etudiants.txt` in the repository.
 -Inserting the student at the correct position:
 For an unordered file, we could have simply opened the file in append mode to add the new student directly. However, maintaining the order required a more sophisticated approach.
  . Using fseek was attempted, but it caused unintentional changes to the data, as file I/O does not support direct insertion without overwriting.
- . Our final solution was to use a temporary file. 
+ . Using an array to store all students and reorder them in memory was another option. However, since the dataset may grow large, relying on main memory could be infeasible. While working with secondary memory is slower, it was deemed more efficient in our case.
+ . Our final solution was to use a temporary file.
  
 ### 2. Search Student by ID
 The `search_student_by_id` function retrieves and displays detailed information about a student based on their unique ID from a data file.
@@ -73,17 +74,18 @@ This function allows modifying student information as requested by the user. The
 - **status**
 
 #### Instructions
-1. **Prompt the user** to enter the ID of the student whose information is to be modified.
-2. Open the main file `Listes_Etudiants.txt` in **read mode** and check if it is empty (no changes will be possible if it is).
-3. Open the temporary file `temp.txt` in **write mode** to store the modified data. Check its existence as well.
-4. Use a `while` loop to read each line from the main file and validate all the student’s fields (**condition < 11**).
-5. Store the line read into the variable `line`.
-6. **Compare the user-entered ID** with the ID read from the line:
+1. We open the original file in reading mode and read it line by line. At the same time, we store all the IDs from the file into an array to check against the modified ID.
+2. **Prompt the user** to enter the ID of the student whose information is to be modified.
+3. Open the main file `Listes_Etudiants.txt` in **read mode** and check if it is empty (no changes will be possible if it is).
+4. Open the temporary file `temp.txt` in **write mode** to store the modified data. Check its existence as well.
+5. Use a `while` loop to read each line from the main file and validate all the student’s fields (**condition < 11**).
+6. Store the line read into the variable `line`.
+7. **Compare the user-entered ID** with the ID read from the line:
    - If they match, display a menu (using a `switch-case`) with modification options (1 to 7).
    - If they don’t match, read the next line (via the `while` loop) and repeat the instructions (steps 4, 5, and 6).
-7. Write the data (modified or not) into the temporary file.
-8. After processing all the lines (**end of file reached**), close both files.
-9. If modifications were made, rename the temporary file to the original file’s name and delete the original file.
+8. Write the data (modified or not) into the temporary file.
+9. After processing all the lines (**end of file reached**), close both files.
+10. If modifications were made, rename the temporary file to the original file’s name and delete the original file.
 
 #### Problems Encountered
 1. Writing multiple variables on the same line using the `sscanf` function.
